@@ -15,7 +15,7 @@ SECRET_KEY = os.environ.get('SECRET_KEY', 'django-insecure-dev-key-change-in-pro
 DEBUG = os.environ.get('DEBUG', 'True').lower() == 'true'
 
 # Allowed hosts
-ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'school-ms-m6ns.onrender.com']
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'school-ms-m6ns.onrender.com','stingacdemy.pythonanywhere.com']
 
 # Add Render's external hostname if provided
 RENDER_EXTERNAL_HOSTNAME = os.environ.get('RENDER_EXTERNAL_HOSTNAME')
@@ -114,6 +114,7 @@ CORS_ALLOWED_ORIGINS = [
     'http://localhost:5173',
     'http://127.0.0.1:5173',
     'https://school-ms-m6ns.onrender.com',
+    'https://stingacdemy.pythonanywhere.com/',
 ]
 if RENDER_EXTERNAL_HOSTNAME:
     CORS_ALLOWED_ORIGINS.append(f'https://{RENDER_EXTERNAL_HOSTNAME}')
