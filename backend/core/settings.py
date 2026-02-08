@@ -114,7 +114,7 @@ CORS_ALLOWED_ORIGINS = [
     'http://localhost:5173',
     'http://127.0.0.1:5173',
     'https://school-ms-m6ns.onrender.com',
-    'https://stingacdemy.pythonanywhere.com/',
+    'https://stingacdemy.pythonanywhere.com',
 ]
 if RENDER_EXTERNAL_HOSTNAME:
     CORS_ALLOWED_ORIGINS.append(f'https://{RENDER_EXTERNAL_HOSTNAME}')
