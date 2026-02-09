@@ -77,8 +77,6 @@ function StudentDetail() {
 
     const paidInstallments = student.installments?.map(i => i.installment_number) || [];
 
-
-    console.log(student);
     return (
         <div className="space-y-6 animate-fadeIn">
             {/* Toast Notification */}

@@ -203,34 +203,73 @@ function StudentList() {
                     </div>
                 ) : (
                     <>
-                        <div className="overflow-x-auto flex-1">
+                        {/* Mobile Card View */}
+                        <div className="sm:hidden flex-1 divide-y divide-gray-100">
+                            {students.map((student) => (
+                                <div key={student.id} className="p-4 hover:bg-gray-50 transition-colors">
+                                    <div className="flex items-start justify-between gap-3">
+                                        <div className="flex-1 min-w-0">
+                                            <div className="flex items-center gap-2 mb-1">
+                                                <p className="font-bold text-gray-800 truncate">{student.name}</p>
+                                                <span className="px-2 py-0.5 rounded-full bg-primary-100 text-primary-700 text-xs font-medium shrink-0">
+                                                    {getLevelLabel(student.academic_level)}
+                                                </span>
+                                            </div>
+                                            <p className="text-xs text-gray-500 font-mono mb-2">{student.student_code}</p>
+                                            <div className="flex items-center gap-3 text-sm">
+                                                <span className="text-primary-600 font-bold">{student.total_paid} ج.س</span>
+                                                <span className="text-gray-400">|</span>
+                                                <span className="text-gray-500">المتبقي: {student.remaining_amount}</span>
+                                            </div>
+                                        </div>
+                                        <div className="flex items-center gap-1 shrink-0">
+                                            <Link
+                                                to={`/dashboard/students/${student.id}`}
+                                                className="p-2 rounded-lg bg-primary-50 text-primary-600"
+                                            >
+                                                <Eye className="w-5 h-5" />
+                                            </Link>
+                                            <button
+                                                onClick={() => handleDeleteClick(student.id)}
+                                                className="p-2 rounded-lg bg-red-50 text-red-600"
+                                            >
+                                                <Trash2 className="w-5 h-5" />
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+
+                        {/* Desktop/Tablet Table View */}
+                        <div className="hidden sm:block overflow-x-auto flex-1">
                             <table className="w-full">
                                 <thead>
                                     <tr className="bg-gray-50 border-b border-gray-100">
-                                        <th className="px-6 py-4 text-right text-sm font-medium text-gray-500">الكود</th>
-                                        <th className="px-6 py-4 text-right text-sm font-medium text-gray-500">الاسم</th>
-                                        <th className="px-6 py-4 text-right text-sm font-medium text-gray-500">الصف</th>
-                                        <th className="px-6 py-4 text-right text-sm font-medium text-gray-500">التخصص</th>
-                                        <th className="px-6 py-4 text-right text-sm font-medium text-gray-500">النتيجة</th>
-                                        <th className="px-6 py-4 text-right text-sm font-medium text-gray-500">المدفوع</th>
-                                        <th className="px-6 py-4 text-right text-sm font-medium text-gray-500">الزي</th>
-                                        <th className="px-6 py-4 text-right text-sm font-medium text-gray-500">الإجراءات</th>
+                                        <th className="px-4 py-4 text-right text-sm font-medium text-gray-500">الكود</th>
+                                        <th className="px-4 py-4 text-right text-sm font-medium text-gray-500">الاسم</th>
+                                        <th className="px-4 py-4 text-right text-sm font-medium text-gray-500">الصف</th>
+                                        <th className="hidden lg:table-cell px-4 py-4 text-right text-sm font-medium text-gray-500">التخصص</th>
+                                        <th className="hidden xl:table-cell px-4 py-4 text-right text-sm font-medium text-gray-500">النتيجة</th>
+                                        <th className="px-4 py-4 text-right text-sm font-medium text-gray-500">المدفوع</th>
+                                        <th className="hidden xl:table-cell px-4 py-4 text-right text-sm font-medium text-gray-500">الزي</th>
+                                        <th className="px-4 py-4 text-right text-sm font-medium text-gray-500">الإجراءات</th>
                                     </tr>
                                 </thead>
                                 <tbody className="divide-y divide-gray-100">
                                     {students.map((student) => (
                                         <tr key={student.id} className="hover:bg-gray-50 transition-colors">
-                                            <td className="px-6 py-4 text-sm font-mono text-gray-600">{student.student_code}</td>
-                                            <td className="px-6 py-4">
+                                            <td className="px-4 py-4 text-sm font-mono text-gray-600">{student.student_code}</td>
+                                            <td className="px-4 py-4">
                                                 <p className="font-medium text-gray-800">{student.name}</p>
                                                 <p className="text-sm text-gray-500">{student.parent_name}</p>
                                             </td>
-                                            <td className="px-6 py-4">
+                                            <td className="px-4 py-4">
                                                 <span className="px-3 py-1 rounded-full bg-primary-100 text-primary-700 text-sm font-medium">
                                                     {getLevelLabel(student.academic_level)}
                                                 </span>
                                             </td>
-                                            <td className="px-6 py-4">
+                                            <td className="hidden lg:table-cell px-4 py-4">
                                                 <span className={`px-3 py-1 rounded-full text-sm font-medium ${student.specialization === 'Sci'
                                                     ? 'bg-accent-100 text-accent-700'
                                                     : student.specialization === 'Lit'
@@ -240,14 +279,14 @@ function StudentList() {
                                                     {getSpecLabel(student.specialization)}
                                                 </span>
                                             </td>
-                                            <td className="px-6 py-4">
+                                            <td className="hidden xl:table-cell px-4 py-4">
                                                 <span className="font-bold text-gray-700">{student.total_score || '-'}</span>
                                             </td>
-                                            <td className="px-6 py-4">
+                                            <td className="px-4 py-4">
                                                 <p className="font-bold text-primary-600">{student.total_paid} ج.س</p>
                                                 <p className="text-sm text-gray-500">المتبقي: {student.remaining_amount}</p>
                                             </td>
-                                            <td className="px-6 py-4">
+                                            <td className="hidden xl:table-cell px-4 py-4">
                                                 {student.uniform_delivered ? (
                                                     <span className="px-3 py-1 rounded-full bg-green-100 text-green-700 text-sm font-medium">
                                                         مسلم ✓
@@ -258,7 +297,7 @@ function StudentList() {
                                                     </span>
                                                 )}
                                             </td>
-                                            <td className="px-6 py-4">
+                                            <td className="px-4 py-4">
                                                 <div className="flex items-center gap-2">
                                                     <Link
                                                         to={`/dashboard/students/${student.id}`}

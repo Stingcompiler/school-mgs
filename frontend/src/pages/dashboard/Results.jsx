@@ -55,8 +55,6 @@ function Results() {
         return labels[level] || level;
     };
 
-    console.log('sts', students);
-
     return (
         <div className="space-y-6 animate-fadeIn">
             <div>

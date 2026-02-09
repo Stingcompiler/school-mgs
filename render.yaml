@@ -27,3 +27,5 @@ databases:
     databaseName: sms_academy
     plan: free  # or starter for production
     region: frankfurt
+
+
